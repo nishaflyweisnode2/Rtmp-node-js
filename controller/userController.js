@@ -65,7 +65,7 @@ exports.verifyOtp = async (req, res) => {
             return res.status(400).send({ status: 400, message: "OTP has expired" });
         }
 
-        return res.status(200).send({ status: 200, message: "OTP verified successfully" });
+        return res.status(200).send({ status: 200, message: "OTP verified successfully", data: user });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Server error" });
