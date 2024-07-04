@@ -38,6 +38,7 @@ exports.registration = async (req, res) => {
             return res.status(201).send({ status: 201, message: "User created and OTP generated successfully", data: user });
         } else {
             user.otp = otp;
+            user.verified = false;
             user.key = await ticketCode();
             await user.save();
             return res.status(200).send({ status: 200, message: "OTP generated and saved successfully", data: user });
