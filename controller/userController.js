@@ -49,12 +49,14 @@ exports.registration = async (req, res) => {
 };
 exports.verifyOtp = async (req, res) => {
     try {
-        const { otp } = req.body;
+        const { otp, verified } = req.body;
 
         if (!otp) {
             return res.status(400).send({ status: 400, message: "OTP is required" });
         }
+        if (verified) {
 
+        }
         const user = await User.findOne({ otp: otp });
 
         if (!user) {
@@ -63,6 +65,11 @@ exports.verifyOtp = async (req, res) => {
 
         if (user.otpExpiration < Date.now()) {
             return res.status(400).send({ status: 400, message: "OTP has expired" });
+        }
+
+        if (verified) {
+            user.verified = true;
+            await user.save();
         }
 
         return res.status(200).send({ status: 200, message: "OTP verified successfully", data: user });

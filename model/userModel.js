@@ -56,6 +56,10 @@ var userSchema = new schema(
             type: String,
             enum: ["Approved", "Reject", "Pending"],
         },
+        verified: {
+            type: Boolean,
+            default: false
+        },
 
     },
     { timestamps: true }
