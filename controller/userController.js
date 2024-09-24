@@ -147,6 +147,23 @@ exports.getAllMeetings = async (req, res) => {
         });
     }
 };
+exports.getMeetingsByCode = async (req, res) => {
+    try {
+        const meetings = await Meeting.find({code:req.params.code}).sort({ createdAt: -1 });
+        return res.status(200).json({
+            status: 200,
+            msg: 'Meetings fetched successfully',
+            data: meetings,
+        });
+    } catch (error) {
+        console.error('Error fetching meetings:', error);
+        return res.status(500).json({
+            status: 500,
+            msg: 'Server error',
+            error: error.message,
+        });
+    }
+};
 exports.getMeetingById = async (req, res) => {
     try {
         const meeting = await Meeting.findById(req.params.id);
