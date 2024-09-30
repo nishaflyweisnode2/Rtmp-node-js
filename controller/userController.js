@@ -74,9 +74,9 @@ exports.verifyOtp = async (req, res) => {
             return res.status(404).send({ status: 404, message: "Invalid OTP" });
         }
 
-        if (user.otpExpiration < Date.now()) {
-            return res.status(400).send({ status: 400, message: "OTP has expired" });
-        }
+        // if (user.otpExpiration < Date.now()) {
+        //     return res.status(400).send({ status: 400, message: "OTP has expired" });
+        // }
 
         if (verified) {
             user.verified = true;
